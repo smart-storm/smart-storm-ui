@@ -16,3 +16,8 @@ before_script:
  
 script:
   - ng build
+  
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/dist travis@alfa.smartstorm.io:/home/travis/test
