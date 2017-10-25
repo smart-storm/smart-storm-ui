@@ -16,16 +16,16 @@ export class DataService {
 
   //SENSORS
   submitSensor(sensor:any){
-    return this._http.post('/api/sensors/submit',sensor);
+    return this._http.post('/sensors/submit',sensor);
   }
   getSensors(){
-    return this._http.get('/api/sensors',{});
+    return this._http.get('/sensors',{});
   }
   deleteSensor(sensor:any){
-    return this._http.post('/api/sensors/delete',sensor);
+    return this._http.post('/sensors/delete',sensor);
   }
   updateSensor(sensor:any){
-    return this._http.post('/api/sensors/update',sensor);
+    return this._http.post('/sensors/update',sensor);
   }
 
 

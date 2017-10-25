@@ -17,7 +17,7 @@ export class UserService{
     }
 
     login(username: string, password: string) {
-      return this.http.post('/api/users/authenticate', { email: username, password: password })
+      return this.http.post('/users/authenticate', { email: username, password: password })
         .map((response: Response) => {
           let user = response;
           if (user) {
@@ -31,7 +31,7 @@ export class UserService{
     }
 
     create(user: any) {
-      return this.http.post('/api/users/register', user);
+      return this.http.post('/users/register', user);
     }
 
     logout() {
