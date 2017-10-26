@@ -19,7 +19,7 @@ export class DataService {
     return this._http.post('/sensors/submit',sensor);
   }
   getSensors(){
-    return this._http.get('/sensors',{});
+    return this._http.post('/sensors',{});
   }
   deleteSensor(sensor:any){
     return this._http.post('/sensors/delete',sensor);
