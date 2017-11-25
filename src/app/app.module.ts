@@ -20,25 +20,34 @@ import { AuthGuard } from "./helpers/auth.guard";
 
 import { SensorsComponent } from './sensors/sensors.component';
 
+import {DashboardsModule} from "./inspinia/views/dashboards/dashboards.module";
+import {AppviewsModule} from "./inspinia/views/appviews/appviews.module";
+
+// App modules/components
+import {LayoutsModule} from "./inspinia/components/common/layouts/layouts.module";
+
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    SensorsComponent
+      AppComponent,
+      LoginComponent,
+      RegisterComponent,
+      SensorsComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpModule,
-    FormsModule,
-    JsonpModule,
-    AdvGrowlModule,
-    DataTableModule,
-    SharedModule,
-    DialogModule,
-    BrowserAnimationsModule,
-    ButtonModule
+      BrowserModule,
+      AppRoutingModule,
+      HttpModule,
+      FormsModule,
+      JsonpModule,
+      AdvGrowlModule,
+      DataTableModule,
+      SharedModule,
+      DialogModule,
+      BrowserAnimationsModule,
+      ButtonModule,
+      DashboardsModule,
+      LayoutsModule,
+      AppviewsModule,
   ],
   providers: [
   requestOptionsProvider,

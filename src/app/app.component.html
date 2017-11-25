@@ -11,6 +11,7 @@
         <ul class="nav navbar-nav navbar-left">
           <!-- <li><a style="padding-top:0px;padding-bottom: 0px"><img [src]="fullImagePath" style="height:100%"></a></li> -->
           <li [ngClass]="(getActiveTab() == 'sensors') ? 'active' : ''"><a href="/sensors">{{ 'sensors' }}</a></li>
+          <li [ngClass]="(getActiveTab() == 'dashboard') ? 'active' : ''"><a href="/dashboard">{{ 'dashboard' }}</a></li>
         </ul>
       </ng-template>
     
