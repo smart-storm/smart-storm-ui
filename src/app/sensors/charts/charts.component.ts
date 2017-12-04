@@ -38,7 +38,7 @@ export class ChartsComponent implements OnInit, OnDestroy {
                 }
                 floatDatasets.push(floatDataset);
             }
-            console.log(floatDatasets);
+
             this.flotDatasets = floatDatasets;
         });
     }
