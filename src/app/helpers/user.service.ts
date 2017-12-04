@@ -44,8 +44,4 @@ export class UserService{
     registerOption() {
       return true;
     }
-
-
-
-
 }

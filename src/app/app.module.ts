@@ -26,6 +26,13 @@ import {AppviewsModule} from "./inspinia/views/appviews/appviews.module";
 // App modules/components
 import {LayoutsModule} from "./inspinia/components/common/layouts/layouts.module";
 
+//Socket IO
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { socketServiceProvider } from "./helpers/socket.service";
+import { ChartsModule } from "./sensors/charts/charts.module";
+
+const socketConfig: SocketIoConfig = { url: 'http://localhost:33855', options: {} };
+
 @NgModule({
   declarations: [
       AppComponent,
@@ -48,13 +55,18 @@ import {LayoutsModule} from "./inspinia/components/common/layouts/layouts.module
       DashboardsModule,
       LayoutsModule,
       AppviewsModule,
+      ChartsModule,
+      SocketIoModule.forRoot(socketConfig)
   ],
   providers: [
-  requestOptionsProvider,
-  	UserService,
-    DataService,
-    customHttpProvider,
-    AuthGuard],
+        requestOptionsProvider,
+        UserService,
+        DataService,
+        customHttpProvider,
+        AuthGuard,
+    // SocketService,
+        socketServiceProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { DataService } from '../helpers/data.service';
 import { AdvGrowlService } from 'primeng-advanced-growl';
+import { UserService } from "../helpers/user.service";
 
 @Component({
   selector: 'sensors-component',
@@ -22,8 +23,10 @@ export class SensorsComponent implements AfterViewInit {
 	newSensor: boolean;
 
 	constructor(private service:DataService,
-       private growlService: AdvGrowlService) {
-
+                private growlService: AdvGrowlService,
+                private _user: UserService
+                // private _socket: SocketService
+    ) {
 	}
 
 	ngAfterViewInit(): void {
@@ -40,6 +43,7 @@ export class SensorsComponent implements AfterViewInit {
     }
     
     save() {
+	    this.sensor.display_chart = (this.sensor.display_chart) ? true : false;
         if(this.newSensor){
             this.service.submitSensor(this.sensor).subscribe((status:any)=>{
                 // console.log(status);
@@ -52,7 +56,7 @@ export class SensorsComponent implements AfterViewInit {
         }
         else{
             this.service.updateSensor(this.sensor).subscribe((status:any)=>{
-                // console.log(status);                  
+                // console.log(status);
                 this.growlService.createSuccessMessage(status.user,'Update successful');
 
                 // this.growlService.createErrorMessage('',status.user);

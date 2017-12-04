@@ -20,23 +20,36 @@ import {LoginComponent as LoginInspinia} from "./inspinia/views/appviews/login.c
 import {BlankLayoutComponent} from "./inspinia/components/common/layouts/blankLayout.component";
 import {BasicLayoutComponent} from "./inspinia/components/common/layouts/basicLayout.component";
 import {TopNavigationLayoutComponent} from "./inspinia/components/common/layouts/topNavigationLayout.component";
+import {ChartsComponent} from "./sensors/charts/charts.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'sensors', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'sensors', component: SensorsComponent, canActivate: [AuthGuard] },
+    { path: '', redirectTo: 'sensors', pathMatch: 'full'},
+    { path: 'login', component: LoginInspinia},
+    { path: 'register', component: RegisterComponent},
+    { path: 'starterview', component:BasicLayoutComponent,
+        children: [
+        {path: '', component: StarterViewComponent}
+        ]
+    },
 
     {
-        path: 'dashboards', component: BasicLayoutComponent,
+        path: 'sensors', component: BasicLayoutComponent, canActivate: [AuthGuard],
         children: [
-            {path: 'dashboard1', component: Dashboard1Component},
-            {path: 'dashboard2', component: Dashboard2Component},
-            {path: 'dashboard3', component: Dashboard3Component},
-            {path: 'dashboard4', component: Dashboard4Component},
-            {path: 'dashboard5', component: Dashboard5Component}
+            {path: 'list', component: SensorsComponent},
+            {path: 'charts', component: ChartsComponent}
         ]
-    }
+    },
+
+{
+    path: 'dashboards', component: BasicLayoutComponent, canActivate: [AuthGuard],
+    children: [
+        {path: 'dashboard1', component: Dashboard1Component},
+        {path: 'dashboard2', component: Dashboard2Component},
+        {path: 'dashboard3', component: Dashboard3Component},
+        {path: 'dashboard4', component: Dashboard4Component},
+        {path: 'dashboard5', component: Dashboard5Component}
+    ]
+}
     // {
     //     path: 'dashboards', component: TopNavigationLayoutComponent,
     //     children: [
