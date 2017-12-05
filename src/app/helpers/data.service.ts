@@ -27,7 +27,9 @@ export class DataService {
   updateSensor(sensor:any){
     return this._http.post('/sensors/update',sensor);
   }
-
+  getSensorData(sensor:any){
+    return this._http.post('/sensors/data', sensor);
+  }
 
 }
 
