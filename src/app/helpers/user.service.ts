@@ -34,6 +34,24 @@ export class UserService{
       return this.http.post('/users/register', user);
     }
 
+    async logged() {
+        if(this.userData.logged){
+            console.log("bramka 1")
+            return true;
+        } else {
+            var response : any = await this.http.post("/users/logged", {}).toPromise();
+            if(response.logged){
+                let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                this.userData = currentUser;
+                this.userData.logged = true;
+                this.status.next(this.userData);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     logout() {
       localStorage.removeItem('currentUser');
       this.userData = { logged: false };
@@ -43,5 +61,9 @@ export class UserService{
 
     registerOption() {
       return true;
+    }
+
+    getToken() {
+        return JSON.parse(localStorage.getItem('currentUser')).token
     }
 }

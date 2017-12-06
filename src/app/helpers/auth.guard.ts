@@ -8,8 +8,11 @@ export class AuthGuard implements CanActivate {
 
     constructor(private router: Router,private us:UserService) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.us.userData.logged) {
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        var w  = await this.us.logged();
+        console.log("to jest to:");
+        console.log(w);
+        if (w) {
             // console.log(localStorage.getItem('currentUser'), route);
             return true;
         }
