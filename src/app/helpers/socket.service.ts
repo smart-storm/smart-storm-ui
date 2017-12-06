@@ -6,7 +6,7 @@ import { UserService } from "./user.service";
 export class SocketService extends Socket{
 
     constructor(private _user:UserService) {
-        super({ url: 'http://localhost:8000', options: {query: 'auth_token=' + _user.getToken() }});
+        super({ url: 'http://alfa.smartstorm.io', options: {query: 'auth_token=' + _user.getToken() }});
     }
 
     sendMessage(msg: string){
