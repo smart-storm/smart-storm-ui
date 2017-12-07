@@ -15,8 +15,8 @@
       <li [ngClass]="{active: activeRoute('sensors')}">
         <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Sensors</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('sensors')}">
-          <li [ngClass]="{active: activeRoute('list')}"><a [routerLink]="['/sensors/list']">Lista sensorów</a></li>
-          <li [ngClass]="{active: activeRoute('charts')}"><a [routerLink]="['/sensors/charts']">Wykresy</a></li>
+          <li [ngClass]="{active: activeRoute('list')}"><a [routerLink]="['/sensors/list']">Sensor list</a></li>
+          <li [ngClass]="{active: activeRoute('charts')}"><a [routerLink]="['/sensors/charts']">Charts</a></li>
         </ul>
       </li>
     </ul>

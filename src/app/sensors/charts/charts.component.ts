@@ -4,8 +4,10 @@ import { socketServiceFactory, SocketService } from "../../helpers/socket.servic
 // Import Chart.js library
 import 'chart.js';
 import { FlotChartDirective } from '../../inspinia/components/charts/flotChart';
-import {UserService} from "../../helpers/user.service";
-import {Subscription} from "rxjs/Subscription";
+import { UserService } from "../../helpers/user.service";
+import { Subscription } from "rxjs/Subscription";
+import { AdvGrowlService } from 'primeng-advanced-growl';
+
 
 declare var jQuery:any;
 
@@ -22,7 +24,7 @@ export class ChartsComponent implements OnInit, OnDestroy {
     public numberOfCharts: any = [];
     public chartsMetaData: any;
 
-    constructor(private _user:UserService){
+    constructor(private _user:UserService, private growlService: AdvGrowlService){
         this.socket = socketServiceFactory(_user);
         this.numberOfCharts = 0;
     }
@@ -31,20 +33,31 @@ export class ChartsComponent implements OnInit, OnDestroy {
         this.subscriber = this.socket.getChartsData().subscribe(data => {
             this.chartsMetaData = data.map(x => x.information);
             var floatDatasets = [];
+            var recordsCounter = 0;
+
             for(let j=0; j < data.length; j++){
                 let singleChartData = data[j];
                 let floatDataset = [[]];
+                if(this.flotDatasets.length > j){
+                    for(let i=0; i < this.flotDatasets[j][0].length; i++){
+                        floatDataset[0].push([this.flotDatasets[j][0][i][0], this.flotDatasets[j][0][i][1]]);
+                    }
+                }
+                let s = floatDataset[0].length;
                 for(let i=0; i < singleChartData.rows.length; i++){
-                    floatDataset[0].push([i, singleChartData.rows[i].value]);
+                    floatDataset[0].push([s + i, singleChartData.rows[i].value]);
+                    recordsCounter++;
                 }
                 floatDatasets.push(floatDataset);
             }
 
+            this.growlService.createInfoMessage(recordsCounter + " records got updated", "Update");
             this.flotDatasets = floatDatasets;
+
         });
 
-        this.errSubscriber = this.socket.getErrors().subscribe(err => {
-            console.log(err);
+        this.errSubscriber = this.socket.getErrors().subscribe( (err:any) => {
+            this.growlService.createErrorMessage(err.body,"Data loading failed");
         });
     }
 

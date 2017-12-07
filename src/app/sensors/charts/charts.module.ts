@@ -11,11 +11,21 @@ import { IboxtoolsModule } from '../../inspinia/components/common/iboxtools/ibox
 import { PeityModule } from '../../inspinia/components/charts/peity';
 import { SparklineModule } from '../../inspinia/components/charts/sparkline';
 import { JVectorMapModule } from '../../inspinia/components/map/jvectorMap';
+import { AdvGrowlModule } from 'primeng-advanced-growl';
 
 
 @NgModule({
-    declarations: [ChartsComponent],
-    imports     : [BrowserModule, ChartMod, FlotModule,IboxtoolsModule,PeityModule,SparklineModule,JVectorMapModule],
+    declarations:[ChartsComponent],
+    imports     :[
+        BrowserModule,
+        ChartMod,
+        FlotModule,
+        IboxtoolsModule,
+        PeityModule,
+        SparklineModule,
+        JVectorMapModule,
+        AdvGrowlModule
+    ],
     exports     : [ChartsComponent],
 })
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ng-socket-io';
 import { UserService } from "./user.service";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SocketService extends Socket{
 
     constructor(private _user:UserService) {
-        super({ url: 'http://alfa.smartstorm.io', options: {query: 'auth_token=' + _user.getToken() }});
+        super({ url: environment.socketUrl, options: {query: 'auth_token=' + _user.getToken() }});
     }
 
     sendMessage(msg: string){
@@ -20,7 +21,7 @@ export class SocketService extends Socket{
     }
 
     getErrors(){
-        return this.fromEvent("error");
+        return this.fromEvent("error_msg");
     }
 
     getChartsData() {
