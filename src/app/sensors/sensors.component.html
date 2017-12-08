@@ -39,6 +39,17 @@
 		        <div class="ui-grid-col-4"><label for="id">Id</label></div>
 		        <div class="ui-grid-col-8"><input class="form-control" pInputText name="id" [(ngModel)]="sensor._id" disabled="true" novalidate/></div>
 		    </div>
+
+			<div class="ui-grid-row form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<div class="ui-grid-col-4"><label for="latitude">Latitude</label></div>
+				<div class="ui-grid-col-8"><input class="form-control" type='text' name="latitude" [(ngModel)]="sensor.latitude" #name='ngModel'  /></div>
+			</div>
+
+			<div class="ui-grid-row form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<div class="ui-grid-col-4"><label for="longitude">Longitude</label></div>
+				<div class="ui-grid-col-8"><input class="form-control" type='text' name="longitude" [(ngModel)]="sensor.longitude" #name='ngModel'  /></div>
+			</div>
+
 			<div class="ui-grid-row form-group">
 				<div class="ui-grid-col-4"><label for="id">Rysuj wykres</label></div>
 				<div class="ui-grid-col-8">

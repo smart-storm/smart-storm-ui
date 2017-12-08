@@ -10,13 +10,7 @@ export class AuthGuard implements CanActivate {
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         var w  = await this.us.logged();
-        console.log("to jest to:");
-        console.log(w);
-        if (w) {
-            // console.log(localStorage.getItem('currentUser'), route);
-            return true;
-        }
-
+        if (w) return true;
         // not logged in so redirect to login page with the return url
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
         return false;
