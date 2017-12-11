@@ -43,9 +43,8 @@ export class ChartsComponent implements OnInit, OnDestroy {
                         floatDataset[0].push([this.flotDatasets[j][0][i][0], this.flotDatasets[j][0][i][1]]);
                     }
                 }
-                let s = floatDataset[0].length;
                 for(let i=0; i < singleChartData.rows.length; i++){
-                    floatDataset[0].push([s + i, singleChartData.rows[i].value]);
+                    floatDataset[0].push([singleChartData.rows[i].created_epoch*1000, singleChartData.rows[i].value]);
                     recordsCounter++;
                 }
                 floatDatasets.push(floatDataset);
@@ -74,6 +73,10 @@ export class ChartsComponent implements OnInit, OnDestroy {
             series: {splines: {show: true, tension: 0.1, lineWidth: 1, fill: 0.3}, lines: {show: false}},
             grid: {tickColor: "#d5d5d5", borderWidth: 1, color: '#d5d5d5'},
             colors: ["#1ab394", "#1C84C6"],
+            xaxis: {
+                mode: "time",
+                timeformat: "%Y/%m/%d %H:%M"
+            }
         };
 
 
