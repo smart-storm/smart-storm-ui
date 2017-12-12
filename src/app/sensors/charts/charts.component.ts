@@ -43,7 +43,7 @@ export class ChartsComponent implements OnInit, OnDestroy {
                         floatDataset[0].push([this.flotDatasets[j][0][i][0], this.flotDatasets[j][0][i][1]]);
                     }
                 }
-                for(let i=singleChartData.rows.length-1; i >=0; i++){
+                for(let i=singleChartData.rows.length-1; i >=0; i--){
                     floatDataset[0].unshift([singleChartData.rows[i].created_epoch*1000, singleChartData.rows[i].value]);
                     recordsCounter++;
                 }
