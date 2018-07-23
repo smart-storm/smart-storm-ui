@@ -17,7 +17,7 @@ export class UserService{
     }
 
     login(username: string, password: string) {
-      return this.http.post('/api/users/authenticate', { email: username, password: password })
+      return this.http.post('/users/authenticate', { email: username, password: password })
         .map((response: Response) => {
           let user = response;
           if (user) {
@@ -31,7 +31,24 @@ export class UserService{
     }
 
     create(user: any) {
-      return this.http.post('/api/users/register', user);
+      return this.http.post('/users/register', user);
+    }
+
+    async logged() {
+        if(this.userData.logged){
+            return true;
+        } else {
+            var response : any = await this.http.post("/users/logged", {}).toPromise().catch((err)=> { console.log("Logged out") });
+            if(response && response.logged){
+                let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                this.userData = currentUser;
+                this.userData.logged = true;
+                this.status.next(this.userData);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     logout() {
@@ -45,7 +62,7 @@ export class UserService{
       return true;
     }
 
-
-
-
+    getToken() {
+        return JSON.parse(localStorage.getItem('currentUser')).token
+    }
 }

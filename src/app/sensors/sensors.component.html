@@ -14,6 +14,9 @@
 	    <p-column field="name" header="Name"></p-column>
 	    <p-column field="date" header="Date added"></p-column>
 	    <p-column field="_id" header="ID"></p-column>
+		<p-column field="display_chart" header="Showmchart">
+
+		</p-column>
 	</p-dataTable>
 </div>
 <!-- <materials-grid #materials></materials-grid> -->
@@ -36,6 +39,26 @@
 		        <div class="ui-grid-col-4"><label for="id">Id</label></div>
 		        <div class="ui-grid-col-8"><input class="form-control" pInputText name="id" [(ngModel)]="sensor._id" disabled="true" novalidate/></div>
 		    </div>
+
+			<div class="ui-grid-row form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<div class="ui-grid-col-4"><label for="latitude">Latitude</label></div>
+				<div class="ui-grid-col-8"><input class="form-control" type='text' name="latitude" [(ngModel)]="sensor.latitude" #name='ngModel'  /></div>
+			</div>
+
+			<div class="ui-grid-row form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<div class="ui-grid-col-4"><label for="longitude">Longitude</label></div>
+				<div class="ui-grid-col-8"><input class="form-control" type='text' name="longitude" [(ngModel)]="sensor.longitude" #name='ngModel'  /></div>
+			</div>
+
+			<div class="ui-grid-row form-group">
+				<div class="ui-grid-col-4"><label for="id">Rysuj wykres</label></div>
+				<div class="ui-grid-col-8">
+					<label class="switch" style="margin-left: 10px;">
+						<input type="checkbox" [(ngModel)]="sensor.display_chart" name="display_chart">
+						<span class="slider round"></span>
+					</label>
+				</div>
+			</div>
 		</div>
     <!-- <p-footer> -->
         <div class="ui-dialog-buttonpane ui-helper-clearfix">

@@ -1,0 +1,19 @@
+<adv-growl [life]="2000"></adv-growl>
+<div class="row  border-bottom white-bg dashboard-header">
+    <div *ngFor="let floatDataset of flotDatasets; let i = index" class="col-sm-12">
+        <div class="row text-left">
+            <div class="col-xs-4">
+                <div class=" m-l-md">
+                    <span class="h4 font-bold m-t block">{{chartsMetaData[i].sensor_name}}</span>
+                    <small class="text-muted m-b block">{{chartsMetaData[i].sensor_id}}</small>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="flot-chart">
+                <div flotChart class="flot-chart-content" [options]="flotOptions" [dataset]="floatDataset"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -7,7 +7,19 @@ import { UserService } from '../helpers/user.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'register.component.html'
+    templateUrl: 'register.component.html',
+    styles: [`
+        .logo-left {
+            font-size: 80px;
+            text-align: left;
+        }
+        
+        .logo-right {
+            font-size: 80px;
+            text-align: right;
+        }
+        
+    `]
 })
 
 export class RegisterComponent {

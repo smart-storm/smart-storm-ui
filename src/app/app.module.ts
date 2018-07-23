@@ -20,32 +20,53 @@ import { AuthGuard } from "./helpers/auth.guard";
 
 import { SensorsComponent } from './sensors/sensors.component';
 
+import {DashboardsModule} from "./inspinia/views/dashboards/dashboards.module";
+import {AppviewsModule} from "./inspinia/views/appviews/appviews.module";
+
+// App modules/components
+import {LayoutsModule} from "./inspinia/components/common/layouts/layouts.module";
+
+//Socket IO
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { socketServiceProvider } from "./helpers/socket.service";
+import { ChartsModule } from "./sensors/charts/charts.module";
+
+const socketConfig: SocketIoConfig = { url: 'http://localhost:33855', options: {} };
+
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    SensorsComponent
+      AppComponent,
+      LoginComponent,
+      RegisterComponent,
+      SensorsComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpModule,
-    FormsModule,
-    JsonpModule,
-    AdvGrowlModule,
-    DataTableModule,
-    SharedModule,
-    DialogModule,
-    BrowserAnimationsModule,
-    ButtonModule
+      BrowserModule,
+      AppRoutingModule,
+      HttpModule,
+      FormsModule,
+      JsonpModule,
+      AdvGrowlModule,
+      DataTableModule,
+      SharedModule,
+      DialogModule,
+      BrowserAnimationsModule,
+      ButtonModule,
+      DashboardsModule,
+      LayoutsModule,
+      AppviewsModule,
+      ChartsModule,
+      SocketIoModule.forRoot(socketConfig)
   ],
   providers: [
-  requestOptionsProvider,
-  	UserService,
-    DataService,
-    customHttpProvider,
-    AuthGuard],
+        requestOptionsProvider,
+        UserService,
+        DataService,
+        customHttpProvider,
+        AuthGuard,
+    // SocketService,
+        socketServiceProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
