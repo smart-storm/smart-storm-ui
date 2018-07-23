@@ -36,11 +36,10 @@ export class UserService{
 
     async logged() {
         if(this.userData.logged){
-            console.log("bramka 1")
             return true;
         } else {
-            var response : any = await this.http.post("/users/logged", {}).toPromise();
-            if(response.logged){
+            var response : any = await this.http.post("/users/logged", {}).toPromise().catch((err)=> { console.log("Logged out") });
+            if(response && response.logged){
                 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
                 this.userData = currentUser;
                 this.userData.logged = true;
