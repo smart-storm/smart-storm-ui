@@ -34,22 +34,32 @@ export class UserService{
       return this.http.post('/users/register', user);
     }
 
-    async logged() {
-        if(this.userData.logged){
-            return true;
-        } else {
-            var response : any = await this.http.post("/users/logged", {}).toPromise().catch((err)=> { console.log("Logged out") });
-            if(response && response.logged){
-                let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                this.userData = currentUser;
-                this.userData.logged = true;
-                this.status.next(this.userData);
-                return true;
+    logged2() {
+        return new Promise((resolve)=>{
+            if(this.userData.logged){
+                resolve(true)
             } else {
-                return false;
+                this.http.post("/users/logged", {}).
+                toPromise().
+                catch((err)=> {
+                    resolve(false);
+                }).
+                then((response: any)=>{
+                    if(response && response.logged){
+                        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                        this.userData = currentUser;
+                        this.userData.logged = true;
+                        this.status.next(this.userData);
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                });
             }
-        }
+        });
     }
+
+
 
     logout() {
       localStorage.removeItem('currentUser');
@@ -63,6 +73,6 @@ export class UserService{
     }
 
     getToken() {
-        return JSON.parse(localStorage.getItem('currentUser')).token
+        return JSON.parse(localStorage.getItem('currentUser')).token;
     }
 }
