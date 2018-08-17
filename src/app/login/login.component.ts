@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { UserService } from '../helpers/user.service';
 import { AdvGrowlService } from 'primeng-advanced-growl';
 import { Router,ActivatedRoute, Params } from '@angular/router';
@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs/Subscription';
         
     `]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
     private security_token: String;
     private sub: Subscription;
@@ -35,12 +35,15 @@ export class LoginComponent {
 
     }
 
+    ngOnInit() {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/sensors/charts';
+    }
+
     login() {
         this.loading=true;
-        // console.log(this.model);
         this.sub = this._user.login(this.model.email, this.model.password).subscribe(res => {
             this.loading = false;
-            this.router.navigate(['/sensors/charts']);
+            this.router.navigate([this.returnUrl]);
         },error => {
             console.log(error);
             this.growlService.createErrorMessage('login_error',error);
